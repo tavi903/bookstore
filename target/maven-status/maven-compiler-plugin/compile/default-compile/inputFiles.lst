@@ -1,0 +1,11 @@
+/home/octavian/eclipse-workspace/BookStoreWebsite/src/com/bookstore/entity/Review.java
+/home/octavian/eclipse-workspace/BookStoreWebsite/src/com/bookstore/entity/Book.java
+/home/octavian/eclipse-workspace/BookStoreWebsite/src/com/bookstore/entity/OrderDetailId.java
+/home/octavian/eclipse-workspace/BookStoreWebsite/src/com/bookstore/entity/Customer.java
+/home/octavian/eclipse-workspace/BookStoreWebsite/src/com/bookstore/dao/GenericDAO.java
+/home/octavian/eclipse-workspace/BookStoreWebsite/src/com/bookstore/dao/JpaDAO.java
+/home/octavian/eclipse-workspace/BookStoreWebsite/src/com/bookstore/entity/BookOrder.java
+/home/octavian/eclipse-workspace/BookStoreWebsite/src/com/bookstore/dao/UserDAO.java
+/home/octavian/eclipse-workspace/BookStoreWebsite/src/com/bookstore/entity/Users.java
+/home/octavian/eclipse-workspace/BookStoreWebsite/src/com/bookstore/entity/Category.java
+/home/octavian/eclipse-workspace/BookStoreWebsite/src/com/bookstore/entity/OrderDetail.java
