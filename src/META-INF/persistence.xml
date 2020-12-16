@@ -8,7 +8,7 @@
 	<persistence-unit name="BookStoreWebsite">
 		<properties>
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:mysql://localhost:3306/bookstoredb?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC" />
+				value="jdbc:mysql://localhost:3306/bookstoredb?useSSL=false&amp;useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC" />
 			<property name="javax.persistence.jdbc.user" value="bookstore" />
 			<property name="javax.persistence.jdbc.password" value="PASSWORD" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
