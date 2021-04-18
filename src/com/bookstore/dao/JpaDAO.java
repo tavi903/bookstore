@@ -47,11 +47,13 @@ public class JpaDAO<E> {
 		entityManager.getTransaction().commit();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<E> findWithNamedQuery(String queryName) {
 		Query query = entityManager.createNamedQuery(queryName);
 		return query.getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<E> findWithNamedQuery(String queryName, Map<String, Object> parameters) {
 		Query query = entityManager.createNamedQuery(queryName);
 		for(Entry<String, Object> param : parameters.entrySet()) {

@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.Map.Entry;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import com.bookstore.entity.Users;
 
@@ -32,12 +33,16 @@ public class UserDAO extends JpaDAO<Users> implements GenericDAO<Users> {
 		return super.find(Users.class, userId);
 	}
 	
+	/**
+	 * Find a user given the email.
+	 * */
 	public Users findByEmail(String email) {
+		
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.putIfAbsent("email", email);
 		
 		List<Users> listUsers = super.findWithNamedQuery("Users.findByEmail", parameters);
-				
+	
 		if(Objects.nonNull(listUsers) && listUsers.size() > 0) {
 			return listUsers.get(0);
 		}

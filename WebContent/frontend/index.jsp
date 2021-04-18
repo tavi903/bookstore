@@ -7,6 +7,7 @@
 <title>Evergreen Books - Online Books Store</title>
 </head>
 <body>
+
 	<jsp:directive.include file="header.jsp" />
 	
 	<div align="center">

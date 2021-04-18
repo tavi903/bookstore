@@ -1,43 +1,79 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Create New User</title>
+<title>User Form</title>
 </head>
 <body>
 	<jsp:directive.include file="header.jsp" />
 	
 	<div align="center">
-		<h2>Create New User</h2>	
+		<c:if test="${ user == null }">
+			<h2>Create New User</h2>
+		</c:if>
+		<c:if test="${ user != null }">
+			<h2>Edit User</h2>
+		</c:if>
 	</div>
 	
 	<div align="center">
-		<form action="create_user" method="post" onsubmit="return validateFormInput()">
-			<table>
-				<tr>
-					<td align="right">Email:</td>
-					<td align="left"><input type="text" id="email" name="email" size="20"/></td>
-				</tr>
-				<tr>
-					<td align="right">Full Name:</td>
-					<td align="left"><input type="text" id="fullName" name="fullName" size="20"/></td>
-				</tr>
-				<tr>
-					<td align="right">Password:</td>
-					<td align="left"><input type="password" id="password" name="password" size="20"/></td>
-				</tr>
-				<tr><td>&nbsp;</td></tr>
-				<tr>
-					<td colspan="2" align="center">
-						<input type="submit" value="Save"/>
-						<input type="button" value="Cancel" onclick="javascript:history.go(-1)"/>
-					</td>
-					<td></td>
-				</tr>
-			</table>
-		</form>
+		<c:if test="${user==null}">
+			<form action="create_user" method="post" onsubmit="return validateFormInput()">
+				<table>
+					<tr>
+						<!-- use fn:escapeXml to escape quotation marks -->
+						<td align="right">Email:</td>
+						<td align="left"><input type="text" id="email" name="email" size="20"/></td>
+					</tr>
+					<tr>
+						<td align="right">Full Name:</td>
+						<td align="left"><input type="text" id="fullName" name="fullName" size="20"/></td>
+					</tr>
+					<tr>
+						<td align="right">Password:</td>
+						<td align="left"><input type="password" id="password" name="password" size="20"/></td>
+					</tr>
+					<tr><td>&nbsp;</td></tr>
+					<tr>
+						<td colspan="2" align="center">
+							<input type="submit" value="Save"/>
+							<input type="button" value="Cancel" onclick="javascript:history.go(-1)"/>
+						</td>
+						<td></td>
+					</tr>
+				</table>
+			</form>
+		</c:if>
+		<c:if test="${user!=null}">
+			<form action="edit_user" method="post" onsubmit="return validateFormInput()">
+				<input hidden="true" name="userId" value="${param.id}" />
+				<table>
+					<tr>
+						<td align="right">Email:</td>
+						<td align="left"><input type="text" id="email" name="email" value="${user.email}" size="20"/></td>
+					</tr>
+					<tr>
+						<td align="right">Full Name:</td>
+						<td align="left"><input type="text" id="fullName" name="fullName" value="${user.fullName}" size="20"/></td>
+					</tr>
+					<tr>
+						<td align="right">Password:</td>
+						<td align="left"><input type="password" id="password" name="password" value="${user.password}" size="20"/></td>
+					</tr>
+					<tr><td>&nbsp;</td></tr>
+					<tr>
+						<td colspan="2" align="center">
+							<input type="submit" value="Save"/>
+							<input type="button" value="Cancel" onclick="javascript:history.go(-1)"/>
+						</td>
+						<td></td>
+					</tr>
+				</table>
+			</form>
+		</c:if>
 	</div>
 	
 	<jsp:directive.include file="footer.jsp" />

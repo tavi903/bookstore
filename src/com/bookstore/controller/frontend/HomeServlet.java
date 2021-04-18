@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/")
+@WebServlet("")
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -18,8 +18,9 @@ public class HomeServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String homepage = "frontend//index.jsp";
+		String homepage = "frontend/index.jsp";
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
+		// response.getWriter().append("Images at: ").append(getServletContext().getRealPath("/BookStoreWebsite/WebContent/images/BookstoreLogo.png"));
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(homepage);
 		requestDispatcher.forward(request, response);
 	}

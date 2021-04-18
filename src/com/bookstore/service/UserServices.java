@@ -61,4 +61,37 @@ public class UserServices {
 		}
 
 	}
+
+	public void getUser() throws ServletException, IOException {
+		Users users = userDAO.find(Users.class, Integer.parseInt(request.getParameter("id")));
+		request.setAttribute("user", users);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("user_form.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	public void updateUser() throws ServletException, IOException {
+		String email = request.getParameter("email");
+		String fullName = request.getParameter("fullName");
+		String password = request.getParameter("password");
+		Users user = new Users(email, password, fullName);
+		user.setUserId(Integer.parseInt(request.getParameter("userId")));
+		
+		// check if a user already exist with that email
+		if (userDAO.findByEmail(email) != null) {
+			String message = "A user with email " + email + " already exists.";
+			request.setAttribute("message", message);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("message.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			Users users = userDAO.update(user);
+			listUser("User updated.");
+		}
+		
+	}
+	
+	public void deleteUser() throws ServletException, IOException {
+		userDAO.delete(Integer.parseInt(request.getParameter("id")));
+		listUser("User deleted");
+	}
+	
 }
