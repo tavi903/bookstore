@@ -8,10 +8,24 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "users", catalog = "bookstoredb")
+@NamedStoredProcedureQuery(
+	    name = "update_user", 
+	    procedureName = "update_user", 
+	    parameters = { 
+	        @StoredProcedureParameter(mode = ParameterMode.IN, type = Long.class, name = "p_last_accessed_time"), 
+	        @StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class, name = "p_user_id"), 
+	        @StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "p_email"),
+	        @StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "p_password"),
+	        @StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "p_full_name")
+	    }
+	)
 @NamedQueries({
 	@NamedQuery(name="Users.findAll", query = "SELECT u FROM Users u ORDER BY u.fullName"),
 	@NamedQuery(name="Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email"),

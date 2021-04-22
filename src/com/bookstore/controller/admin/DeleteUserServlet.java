@@ -1,6 +1,8 @@
 package com.bookstore.controller.admin;
 
 import java.io.IOException;
+
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +21,11 @@ public class DeleteUserServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserServices userServices = new UserServices(request, response);
-		userServices.deleteUser();
+		try {
+			userServices.deleteUser();
+		} catch(EntityNotFoundException entityNotFoundException) {
+			userServices.listUser();
+		}
 	}
 
 }

@@ -8,6 +8,7 @@
 <title>User Form</title>
 </head>
 <body>
+
 	<jsp:directive.include file="header.jsp" />
 	
 	<div align="center">
@@ -79,6 +80,13 @@
 	<jsp:directive.include file="footer.jsp" />
 </body>
 <script type="text/javascript">
+
+	// RFC 2822 regular expression for email
+	function validateEmail(email) {
+	    const re = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
+	    return re.test(String(email).toLowerCase());
+	}
+	
 	function validateFormInput() {
 		var fieldEmail = document.getElementById("email");
 		var fieldFullName = document.getElementById("fullName");
@@ -99,6 +107,11 @@
 		if(fieldPassword.value.length == 0) {
 			alert("Password is required!");
 			fieldPassword.focus();
+			return false;
+		}
+
+		if(!validateEmail(fieldEmail.value)) {
+			alert("Email is not valid!");
 			return false;
 		}
 

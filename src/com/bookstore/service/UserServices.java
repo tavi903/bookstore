@@ -6,10 +6,14 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
+import javax.persistence.StoredProcedureQuery;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import com.bookstore.dao.UserDAO;
 import com.bookstore.entity.Users;
@@ -76,15 +80,28 @@ public class UserServices {
 		Users user = new Users(email, password, fullName);
 		user.setUserId(Integer.parseInt(request.getParameter("userId")));
 		
-		// check if a user already exist with that email
-		if (userDAO.findByEmail(email) != null) {
+		// check if a user already exist with that email and is different from the current
+		if (userDAO.findByEmail(email) != null && !userDAO.get(user.getUserId()).getEmail().equals(email)) {
 			String message = "A user with email " + email + " already exists.";
 			request.setAttribute("message", message);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("message.jsp");
 			dispatcher.forward(request, response);
 		} else {
-			Users users = userDAO.update(user);
-			listUser("User updated.");
+			// Users users = userDAO.update(user);
+			StoredProcedureQuery query = entityManager.createNamedStoredProcedureQuery("update_user");
+			query.setParameter("p_last_accessed_time", request.getSession().getLastAccessedTime());
+			query.setParameter("p_user_id", user.getUserId());
+			query.setParameter("p_email", user.getEmail());
+			query.setParameter("p_password", user.getPassword());
+			query.setParameter("p_full_name", user.getPassword());
+			
+			try {
+				query.execute();
+				listUser("User updated.");
+			} catch (PersistenceException persistenceException) {
+				listUser(new ExceptionUtils().getRootCauseMessage(persistenceException));
+			}
+
 		}
 		
 	}
