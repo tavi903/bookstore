@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import javax.persistence.StoredProcedureQuery;
@@ -109,8 +110,12 @@ public class UserServices {
 	}
 	
 	public void deleteUser() throws ServletException, IOException {
-		userDAO.delete(Integer.parseInt(request.getParameter("id")));
-		listUser("User deleted");
+		try {
+			userDAO.delete(Integer.parseInt(request.getParameter("id")));
+			listUser("The user has been deleted.");
+		} catch(EntityNotFoundException entityNotFoundException) {
+			listUser();
+		}
 	}
 	
 }
