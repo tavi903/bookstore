@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>User Form</title>
+<link rel="shortcut icon" href="./../favicon.ico?" type="image/x-icon" />
 </head>
 <body>
 

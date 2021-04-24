@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Evergreen BookStore Administration</title>
+<link rel="shortcut icon" href="./../favicon.ico?" type="image/x-icon" />
 </head>
 <body>
 	<jsp:directive.include file="header.jsp" />

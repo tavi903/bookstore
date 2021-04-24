@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Evergreen Books - Online Books Store</title>
+<link rel="shortcut icon" href="./../favicon.ico?" type="image/x-icon" />
 </head>
 <body>
 
