@@ -113,7 +113,7 @@ public class UserServices {
 			query.setParameter("p_user_id", user.getUserId());
 			query.setParameter("p_email", user.getEmail());
 			query.setParameter("p_password", user.getPassword());
-			query.setParameter("p_full_name", user.getPassword());
+			query.setParameter("p_full_name", user.getFullName());
 			
 			try {
 				query.execute();
@@ -130,8 +130,13 @@ public class UserServices {
 	
 	public void deleteUser() throws ServletException, IOException {
 		try {
-			userDAO.delete(Integer.parseInt(request.getParameter("id")));
-			listUser("The user has been deleted.");
+			Users userToDelete = userDAO.get(Integer.parseInt(request.getParameter("id")));
+			if(userToDelete!=null && userToDelete.getEmail().equals(request.getSession().getAttribute("userEmail"))) {
+				listUser("You cannot delete yourself!");
+			} else {
+				userDAO.delete(Integer.parseInt(request.getParameter("id")));
+				listUser("The user has been deleted.");
+			}
 		} catch(EntityNotFoundException entityNotFoundException) {
 			listUser();
 		}
