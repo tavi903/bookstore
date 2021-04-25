@@ -50,6 +50,22 @@ public class UserDAO extends JpaDAO<Users> implements GenericDAO<Users> {
 		return null;
 	
 	}
+	
+	public boolean checkLogin(String email, String password) {
+		
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.putIfAbsent("email", email);
+		parameters.putIfAbsent("password", password);
+		
+		List<Users> userLogged = super.findWithNamedQuery("Users.checkLogin", parameters);
+	
+		if(Objects.nonNull(userLogged) && userLogged.size() == 1) {
+			return true;
+		}
+		
+		return false;
+	
+	}
 
 	@Override
 	public void delete(Object id) {

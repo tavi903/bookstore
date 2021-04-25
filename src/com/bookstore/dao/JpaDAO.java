@@ -56,9 +56,12 @@ public class JpaDAO<E> {
 	@SuppressWarnings("unchecked")
 	public List<E> findWithNamedQuery(String queryName, Map<String, Object> parameters) {
 		Query query = entityManager.createNamedQuery(queryName);
+		parameters.forEach((name, value) -> query.setParameter(name, value));
+		/*
 		for(Entry<String, Object> param : parameters.entrySet()) {
 			query.setParameter(param.getKey(), param.getValue());
 		}
+		*/
 		return query.getResultList();
 	}
 	

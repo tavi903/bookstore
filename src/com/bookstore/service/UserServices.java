@@ -34,6 +34,25 @@ public class UserServices {
 		entityManager = entityManagerFactory.createEntityManager();
 		userDAO = new UserDAO(entityManager);
 	}
+	
+	public void login() throws ServletException, IOException {
+		boolean isLogged = userDAO.checkLogin((String) request.getParameter("userEmail"), (String) request.getParameter("password"));
+		if(isLogged) {
+			request.getSession().setAttribute("userEmail", (String) request.getParameter("userEmail"));
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+			requestDispatcher.forward(request, response);
+		} else {
+			request.setAttribute("message", "Login failed!");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
+			requestDispatcher.forward(request, response);
+		}
+	}
+	
+	public void logout() throws ServletException, IOException {
+		request.getSession().removeAttribute("userEmail");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
+		requestDispatcher.forward(request, response);
+	}
 
 	public void listUser() throws ServletException, IOException {
 		List<Users> listUsers = userDAO.listAll();
