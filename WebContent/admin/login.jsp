@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Admin Login</title>
-<link rel="shortcut icon" href="./../favicon.ico?" type="image/x-icon" />
+	<meta charset="UTF-8">
+	<title>Admin Login</title>
+	<link rel="shortcut icon" href="./../favicon.ico?" type="image/x-icon" />
 </head>
 <body>
 	<div align="center">

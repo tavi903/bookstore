@@ -4,9 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>User Form</title>
-<link rel="shortcut icon" href="./../favicon.ico?" type="image/x-icon" />
+	<meta charset="UTF-8">
+	<title>User Form</title>
+	<link rel="shortcut icon" href="./../favicon.ico?" type="image/x-icon" />
+	<link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
 
@@ -14,10 +15,10 @@
 	
 	<div align="center">
 		<c:if test="${ user == null }">
-			<h2>Create New User</h2>
+			<h1 class="pageheading">Create New User</h1>
 		</c:if>
 		<c:if test="${ user != null }">
-			<h2>Edit User</h2>
+			<h1 class="pageheading">Edit User</h1>
 		</c:if>
 	</div>
 	
@@ -41,8 +42,8 @@
 					<tr><td>&nbsp;</td></tr>
 					<tr>
 						<td colspan="2" align="center">
-							<input type="submit" value="Save"/>
-							<input type="button" value="Cancel" onclick="javascript:history.go(-1)"/>
+							<button type="submit" style="margin-right: 20px; width: 66px;">Save</button>
+							<button type="button" onclick="javascript:history.go(-1)">Cancel</button>
 						</td>
 						<td></td>
 					</tr>

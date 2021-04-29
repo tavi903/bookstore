@@ -4,15 +4,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Manage Users - Evergreen BookStore Administration</title>
-<link rel="shortcut icon" href="./../favicon.ico?" type="image/x-icon" />
+	<meta charset="UTF-8">
+	<title>Manage Users - Evergreen BookStore Administration</title>
+	<link rel="shortcut icon" href="./../favicon.ico?" type="image/x-icon" />
+	<link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
 	<jsp:directive.include file="header.jsp" />
 	
 	<div align="center">
-		<h2>Users Management</h2>
+		<h1 class="pageheading">Users Management</h1>
 		<a href="user_form.jsp">Create New User</a>
 	</div>
 	
@@ -23,7 +24,7 @@
 	</c:if>
 	
 	<div align="center">
-		<table border="1" cellpadding="5">
+		<table> <!-- border="1" cellpadding="5" -->
 			<tr>
 				<th>Index</th>
 				<th>ID</th>
