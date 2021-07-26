@@ -46,8 +46,8 @@ th, td {
 }
 
 form > table,
-form > table > tbody > tr > th,
 form > table > tbody > tr,
+form > table > tbody > tr > th,
 form > table > tbody > tr > td {
 	border: 0px;
 }

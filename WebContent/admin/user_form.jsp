@@ -69,8 +69,8 @@
 					<tr><td>&nbsp;</td></tr>
 					<tr>
 						<td colspan="2" align="center">
-							<input type="submit" value="Save"/>
-							<input type="button" value="Cancel" onclick="javascript:history.go(-1)"/>
+							<button type="submit" style="margin-right: 20px; width: 66px;">Save</button>
+							<button type="button" onclick="javascript:history.go(-1)">Cancel</button>
 						</td>
 						<td></td>
 					</tr>

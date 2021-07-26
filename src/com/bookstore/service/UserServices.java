@@ -119,7 +119,7 @@ public class UserServices {
 				query.execute();
 				listUser("User updated.");
 			} catch (PersistenceException persistenceException) {
-				request.setAttribute("message", new ExceptionUtils().getRootCauseMessage(persistenceException));
+				request.setAttribute("message", ExceptionUtils.getRootCauseMessage(persistenceException));
 				RequestDispatcher dispatcher = request.getRequestDispatcher("message.jsp");
 				dispatcher.forward(request, response);
 			}
