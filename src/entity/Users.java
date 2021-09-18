@@ -1,4 +1,4 @@
-package com.bookstore.entity;
+package entity;
 // Generated 17-ott-2020 10.56.50 by Hibernate Tools 5.2.12.Final
 
 import javax.persistence.Column;

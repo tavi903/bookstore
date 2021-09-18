@@ -1,4 +1,4 @@
-package com.bookstore.service;
+package service;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
-import com.bookstore.dao.UserDAO;
-import com.bookstore.entity.Users;
+import dao.UserDAO;
+import entity.Users;
 
 public class UserServices {
 

@@ -1,4 +1,4 @@
-package com.bookstore.dao;
+package dao;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import com.bookstore.entity.Users;
+import entity.Users;
 
 
 

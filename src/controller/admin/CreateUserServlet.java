@@ -1,4 +1,4 @@
-package com.bookstore.controller.admin;
+package controller.admin;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bookstore.entity.Users;
-import com.bookstore.service.UserServices;
+import entity.Users;
+import service.UserServices;
 
 @WebServlet("/admin/create_user")
 public class CreateUserServlet extends HttpServlet {

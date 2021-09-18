@@ -1,4 +1,4 @@
-package com.bookstore.controller.admin;
+package controller.admin;
 
 import java.io.IOException;
 import javax.servlet.Filter;
