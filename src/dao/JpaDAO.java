@@ -2,7 +2,6 @@ package dao;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -16,15 +15,20 @@ public class JpaDAO<E> {
 		this.entityManager = entityManager;
 	}
 
-	public E create(E entity) {
+	public E create(E entity) throws Exception {
 		entityManager.getTransaction().begin();
 		
-		entityManager.persist(entity);
-		entityManager.flush();
-		entityManager.refresh(entity);
+		try {
+			entityManager.persist(entity);
+			entityManager.flush();
+			entityManager.refresh(entity);
+			entityManager.getTransaction().commit();
+			return entity;
+		} catch(Exception e) {
+			entityManager.getTransaction().rollback();
+			throw e;
+		}
 		
-		entityManager.getTransaction().commit();
-		return entity;
 	}
 	
 	public E update(E entity) {

@@ -17,5 +17,17 @@
 			<property name="hibernate.format_sql" value="true" />
 		</properties>
 	</persistence-unit>
+	<persistence-unit name="H2" transaction-type="RESOURCE_LOCAL">
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+	        <property name="javax.persistence.jdbc.user" value="bookstoredb" />
+	        <property name="javax.persistence.jdbc.password" value=""/>	      
+	        <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+	        <property name="hibernate.hbm2ddl.auto" value="update" />
+	        <property name="show_sql" value="true"/>
+	        <property name="hibernate.temp.use_jdbc_metadata_defaults" value="true"/>
+	        <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:bookstoredb;MODE=MySQL;DB_CLOSE_DELAY=-1;DATABASE_TO_LOWER=TRUE;INIT=CREATE SCHEMA IF NOT EXISTS bookstoredb\;RUNSCRIPT FROM 'test/META-INF/create.sql'\;RUNSCRIPT FROM 'test/META-INF/populate.sql'"/>
+		</properties>
+	</persistence-unit>
 
 </persistence>

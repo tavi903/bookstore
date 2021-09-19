@@ -4,22 +4,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Map.Entry;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import entity.Users;
 
 
 
 public class UserDAO extends JpaDAO<Users> implements GenericDAO<Users> {
-
+	
 	public UserDAO(EntityManager entityManager) {
 		super(entityManager);
 	}
 
-	public Users create(Users users) {
+	public Users create(Users users) throws Exception {
 		return super.create(users);
 	}
 	

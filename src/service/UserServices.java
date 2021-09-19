@@ -2,6 +2,7 @@ package service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,6 +14,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolationException;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
@@ -80,8 +82,18 @@ public class UserServices {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("message.jsp");
 			dispatcher.forward(request, response);
 		} else {
-			userDAO.create(user);
-			listUser("New user created successfully.");
+			
+			try {
+				userDAO.create(user);
+				listUser("New user created successfully.");
+			} catch(ConstraintViolationException e) {
+				listUser(e.getConstraintViolations().stream()
+													.map(violation->violation.getPropertyPath().toString()+": "+violation.getMessage())
+													.collect(Collectors.joining("<br>")));
+			} catch(Exception e) {
+				listUser(e.getMessage());
+			}
+			
 		}
 
 	}

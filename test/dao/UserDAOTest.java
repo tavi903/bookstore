@@ -1,6 +1,6 @@
-package com.bookstore.dao;
+package dao;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -9,31 +9,30 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
+import javax.validation.ConstraintViolationException;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import dao.UserDAO;
 import entity.Users;
 
-
-
-class UserDAOTest {
+public class UserDAOTest {
 	
 	private static EntityManagerFactory entityManagerFactory;
 	private static EntityManager entityManager;
 	private static UserDAO userDAO;
 	
-	@BeforeAll
+	@BeforeClass
 	public static void setUpClass() {
-	    entityManagerFactory = Persistence.createEntityManagerFactory("BookStoreWebsite");
+	    entityManagerFactory = Persistence.createEntityManagerFactory("H2");
 		entityManager = entityManagerFactory.createEntityManager();
 	    userDAO = new UserDAO(entityManager);
 	}
 
 	@Test
-	public void testCreateUsers() {
+	public void testCreateUsers() throws Exception {
 		Users users = new Users();
 		users.setEmail("abvaca@gmail.com");
 		users.setFullName("Abvaca Samir");
@@ -41,60 +40,52 @@ class UserDAOTest {
 		
 		Users userSaveToDB = userDAO.create(users);
 		
-		assertTrue(userSaveToDB.getUserId() > 0 );
+		assertTrue(userSaveToDB.getUserId() > 0);
 	}
 	
-	@Test()
-	public void createUsersFailedToSetFields() {
+	@Test(expected = ConstraintViolationException.class)
+	public void createUsersFailedToSetFields() throws Exception {
 		Users users = new Users();
-		
-		assertThrows(PersistenceException.class, () -> userDAO.create(users));
+		userDAO.create(users);
 	}
 	
-	@Test()
+	@Test
 	public void testUpdateUsers() {
-		Users users = new Users();
-		users.setUserId(33);
-		users.setFullName("Tommy Avanzato");
-		users.setPassword("12345");
-		users.setEmail("tommy@gmail.com");
-		Users userSaveToDb = userDAO.update(users);
-		assertEquals(userSaveToDb.getFullName(),"Tommy Avanzato");
+		Users users = userDAO.find(Users.class, 19);
+		users.setEmail("cesare.augusto@gmail.com");
+		Users userUpdated = userDAO.update(users);
+		assertEquals(userUpdated.getEmail(),users.getEmail());
 	}
 	
 	@Test
 	public void testGetUsersFound() {
-		Integer userId = 40;
-		Users user = userDAO.get(userId);
+		Users user = userDAO.get(19);
 		assertNotNull(user);
 	}
 	
 	@Test
 	public void testGetUsersNotFound() {
-		Integer userId = 1;
+		Integer userId = 12345;
 		Users user = userDAO.get(userId);
 		assertNull(user);
 	}
 	
 	@Test
 	public void testDeleteUser() {
-		Integer userId = 40;
-		userDAO.delete(userId);
-		
-		Users user = userDAO.get(userId);
+		userDAO.delete(21);
+		Users user = userDAO.get(21);
 		assertNull(user);
 	}
 	
-	@Test
+	@Test(expected = EntityNotFoundException.class)
 	public void testDeleteNonExistentUser() {
-		Integer userId = 40;
-		assertThrows(EntityNotFoundException.class, () -> userDAO.delete(userId));
+		userDAO.delete(12345);
 	}
 	
 	@Test
 	public void testListAllUsers() {
 		List<Users> users = userDAO.listAll();
-		assertEquals(users.size(), 2);
+		assertTrue(users.size() > 0);
 	}
 	
 	@Test
@@ -103,7 +94,7 @@ class UserDAOTest {
 		assertTrue(totalUsers > 0);
 	}
 	
-	@AfterAll
+	@AfterClass
 	public static void tearDownAfterClass() {
 		entityManager.close();
 		entityManagerFactory.close();

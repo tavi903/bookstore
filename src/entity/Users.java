@@ -5,6 +5,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
+
+import java.io.Serializable;
+
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -12,6 +15,9 @@ import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users", catalog = "bookstoredb")
@@ -32,13 +38,23 @@ import javax.persistence.Table;
 	@NamedQuery(name="Users.countAll", query = "SELECT COUNT(u) FROM Users u"),
 	@NamedQuery(name="Users.checkLogin", query = "SELECT u FROM Users u WHERE u.email = :email AND u.password = :password")
 })
-public class Users implements java.io.Serializable {
+public class Users implements Serializable {
 
 	private Integer userId;
+	
+	@NotNull
+	@Email
+	@Size(max=30)
 	private String email;
+	
+	@NotNull
+	@Size(min=8, max=16)
 	private String password;
+	
+	@NotNull
+	@Size(max=30)
 	private String fullName;
-
+	
 	public Users() {
 	}
 
